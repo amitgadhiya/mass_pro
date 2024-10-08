@@ -96,7 +96,7 @@ a:hover {
 </head>
 <body>
 <div class="container">
-        <h2>Registerationgit credential-cache exit
+        <h2>Register
         </h2>
         <form action="#" method="POST">
             <div class="form-group">
