@@ -1,207 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive User Page with Animations</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            padding: 20px;
-        }
-
-        .user-page {
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin: auto;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .user-card {
-            padding-bottom: 20px;
-            animation: slideIn 1.2s ease-in-out;
-        }
-
-        .user-avatar img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            animation: avatarPop 1s ease-out;
-        }
-
-        .user-info h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #333;
-            opacity: 0;
-            animation: fadeInText 1.4s ease forwards;
-        }
-
-        .user-info p {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 5px;
-            opacity: 0;
-            animation: fadeInText 1.6s ease forwards;
-        }
-
-        .user-info p span {
-            font-weight: 500;
-            color: #333;
-        }
-
-        .btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            max-width: 200px;
-            margin-top: 20px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes fadeInText {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-            0% { transform: translateY(50px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes avatarPop {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            .user-avatar img {
-                width: 120px;
-                height: 120px;
-            }
-
-            .user-info h2 {
-                font-size: 20px;
-            }
-
-            .btn {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .user-avatar img {
-                width: 100px;
-                height: 100px;
-            }
-
-            .user-info h2 {
-                font-size: 18px;
-            }
-
-            .user-info p {
-                font-size: 14px;
-            }
-
-            .btn {
-                font-size: 14px;
-                padding: 10px 16px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 {
+      margin: 0;
+    }
+    .header input[type="text"] {
+      width: 30%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    .user-list {
+      max-height: 300px;
+      overflow-y: auto;
+      margin: 20px 0;
+    }
+    .user-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .user-item:last-child {
+      border-bottom: none;
+    }
+    .user-item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    button {
+      margin: 0 5px;
+      padding: 5px 10px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+    button.delete-btn {
+      background-color: #dc3545;
+    }
+    button.edit-btn {
+      background-color: #28a745;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    .add-user-page, .edit-user-page {
+      display: none;
+    }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="file"] {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .user-profile {
+      display: flex;
+      align-items: center;
+    }
+    .user-profile img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <!-- Main User List Page -->
     <div class="user-page">
-        <div class="user-card">
-            <div class="user-avatar">
-                <img src="https://via.placeholder.com/150" alt="User Avatar" id="user-avatar">
-            </div>
-            <div class="user-info">
-                <h2 id="user-name">John Doe</h2>
-                <p><span>Email:</span> <span id="user-email">john@example.com</span></p>
-                <p><span>Joined:</span> <span id="user-joined">2023-01-15</span></p>
-            </div>
-        </div>
+      <div class="header">
+        <h1>User List</h1>
+        <input type="text" id="searchUser" placeholder="Search Users">
+        <button id="addUserBtn">Add User</button>
+      </div>
 
-        <!-- Button to change user information -->
-        <button class="btn" onclick="updateUser()">Change User Info</button>
+      <div class="user-list" id="userList">
+        <!-- User items will be injected here -->
+      </div>
     </div>
 
-    <script>
-        // Array with some user data
-        const users = [
-            {
-                name: "Jane Smith",
-                email: "jane.smith@example.com",
-                joined: "2022-12-20",
-                avatar: "https://via.placeholder.com/150/92c952"
-            },
-            {
-                name: "Michael Johnson",
-                email: "michael.j@example.com",
-                joined: "2021-05-13",
-                avatar: "https://via.placeholder.com/150/771796"
-            },
-            {
-                name: "Emily Williams",
-                email: "emily.w@example.com",
-                joined: "2023-02-11",
-                avatar: "https://via.placeholder.com/150/24f355"
-            }
-        ];
+    <!-- Add User Page -->
+    <div class="add-user-page">
+      <h2>Add New User</h2>
+      <input type="text" id="newUserName" placeholder="Enter User Name">
+      <input type="email" id="newUserEmail" placeholder="Enter User Email">
+      <input type="tel" id="newUserPhone" placeholder="Enter User Phone">
+      <input type="text" id="newUserAddress" placeholder="Enter User Address">
+      <input type="file" id="newUserImage" accept="image/*">
+      <div class="form-actions">
+        <button id="saveUserBtn">Save</button>
+        <button id="cancelAddBtn">Cancel</button>
+      </div>
+    </div>
 
-        // Function to update user info dynamically
-        function updateUser() {
-            // Randomly pick a user from the users array
-            const randomUser = users[Math.floor(Math.random() * users.length)];
+    <!-- Edit User Page -->
+    <div class="edit-user-page">
+      <h2>Edit User</h2>
+      <input type="text" id="editUserName" placeholder="Edit User Name">
+      <input type="email" id="editUserEmail" placeholder="Edit User Email">
+      <input type="tel" id="editUserPhone" placeholder="Edit User Phone">
+      <input type="text" id="editUserAddress" placeholder="Edit User Address">
+      <input type="file" id="editUserImage" accept="image/*">
+      <div class="form-actions">
+        <button id="updateUserBtn">Update</button>
+        <button id="cancelEditBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
 
-            // Update HTML content with the new user data
-            document.getElementById('user-name').innerText = randomUser.name;
-            document.getElementById('user-email').innerText = randomUser.email;
-            document.getElementById('user-joined').innerText = randomUser.joined;
-            document.getElementById('user-avatar').src = randomUser.avatar;
-        }
-    </script>
+  <script>
+    // Initial users list with profiles
+    let users = [
+      { name: 'John Doe', email: 'john@example.com', phone: '123-456-7890', address: '123 Main St', image: '' },
+      { name: 'Jane Smith', email: 'jane@example.com', phone: '987-654-3210', address: '456 Oak St', image: '' },
+    ];
+    let editingUserIndex = null;
+
+    const userListElement = document.getElementById('userList');
+    const addUserBtn = document.getElementById('addUserBtn');
+    const saveUserBtn = document.getElementById('saveUserBtn');
+    const updateUserBtn = document.getElementById('updateUserBtn');
+    const cancelAddBtn = document.getElementById('cancelAddBtn');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+
+    const userPage = document.querySelector('.user-page');
+    const addUserPage = document.querySelector('.add-user-page');
+    const editUserPage = document.querySelector('.edit-user-page');
+
+    const newUserNameInput = document.getElementById('newUserName');
+    const newUserEmailInput = document.getElementById('newUserEmail');
+    const newUserPhoneInput = document.getElementById('newUserPhone');
+    const newUserAddressInput = document.getElementById('newUserAddress');
+    const newUserImageInput = document.getElementById('newUserImage');
+
+    const editUserNameInput = document.getElementById('editUserName');
+    const editUserEmailInput = document.getElementById('editUserEmail');
+    const editUserPhoneInput = document.getElementById('editUserPhone');
+    const editUserAddressInput = document.getElementById('editUserAddress');
+    const editUserImageInput = document.getElementById('editUserImage');
+
+    const searchUserInput = document.getElementById('searchUser');
+
+    // Render user list
+    function renderUsers(filteredUsers = users) {
+      userListElement.innerHTML = '';
+      filteredUsers.forEach((user, index) => {
+        const userItem = document.createElement('div');
+        userItem.classList.add('user-item');
+        userItem.innerHTML = `
+          <div class="user-profile">
+            <img src="${user.image || 'https://via.placeholder.com/50'}" alt="User Image">
+            <span>${user.name}</span>
+          </div>
+          <div>
+            <button class="edit-btn" onclick="editUser(${index})">Edit</button>
+            <button class="delete-btn" onclick="deleteUser(${index})">Delete</button>
+          </div>
+        `;
+        userListElement.appendChild(userItem);
+      });
+    }
+
+    // Add user
+    function addUser() {
+      const newUserName = newUserNameInput.value.trim();
+      const newUserEmail = newUserEmailInput.value.trim();
+      const newUserPhone = newUserPhoneInput.value.trim();
+      const newUserAddress = newUserAddressInput.value.trim();
+      const newUserImage = newUserImageInput.files[0] ? URL.createObjectURL(newUserImageInput.files[0]) : '';
+
+      if (newUserName && newUserEmail && newUserPhone && newUserAddress) {
+        users.push({
+          name: newUserName,
+          email: newUserEmail,
+          phone: newUserPhone,
+          address: newUserAddress,
+          image: newUserImage
+        });
+        newUserNameInput.value = '';
+        newUserEmailInput.value = '';
+        newUserPhoneInput.value = '';
+        newUserAddressInput.value = '';
+        newUserImageInput.value = '';
+        showUserPage();
+        renderUsers();
+      }
+    }
+
+    // Edit user
+    function editUser(index) {
+      editingUserIndex = index;
+      const user = users[index];
+      editUserNameInput.value = user.name;
+      editUserEmailInput.value = user.email;
+      editUserPhoneInput.value = user.phone;
+      editUserAddressInput.value = user.address;
+      showEditUserPage();
+    }
+
+    // Update user
+    function updateUser() {
+      const updatedUserName = editUserNameInput.value.trim();
+      const updatedUserEmail = editUserEmailInput.value.trim();
+      const updatedUserPhone = editUserPhoneInput.value.trim();
+      const updatedUserAddress = editUserAddressInput.value.trim();
+      const updatedUserImage = editUserImageInput.files[0] ? URL.createObjectURL(editUserImageInput.files[0]) : users[editingUserIndex].image;
+
+      if (updatedUserName && updatedUserEmail && updatedUserPhone && updatedUserAddress && editingUserIndex !== null) {
+        users[editingUserIndex] = {
+          name: updatedUserName,
+          email: updatedUserEmail,
+          phone: updatedUserPhone,
+          address: updatedUserAddress,
+          image: updatedUserImage
+        };
+        editingUserIndex = null;
+        showUserPage();
+        renderUsers();
+      }
+    }
+
+    // Delete user
+    function deleteUser(index) {
+      users.splice(index, 1);
+      renderUsers();
+    }
+
+    // Search users
+    function searchUsers() {
+      const searchValue = searchUserInput.value.toLowerCase();
+      const filteredUsers = users.filter(user => user.name.toLowerCase().includes(searchValue));
+      renderUsers(filteredUsers);
+    }
+
+    // Show User List page
+    function showUserPage() {
+      userPage.style.display = 'block';
+      addUserPage.style.display = 'none';
+      editUserPage.style.display = 'none';
+    }
+
+    // Show Add User page
+    function showAddUserPage() {
+      userPage.style.display = 'none';
+      addUserPage.style.display = 'block';
+      editUserPage.style.display = 'none';
+    }
+
+    // Show Edit User page
+    function showEditUserPage() {
+      userPage.style.display = 'none';
+      addUserPage.style.display = 'none';
+      editUserPage.style.display = 'block';
+    }
+
+    // Initial render
+    renderUsers();
+
+    // Event Listeners
+    addUserBtn.addEventListener('click', showAddUserPage);
+    saveUserBtn.addEventListener('click', addUser);
+    updateUserBtn.addEventListener('click', updateUser);
+    cancelAddBtn.addEventListener('click', showUserPage);
+    cancelEditBtn.addEventListener('click', showUserPage);
+    searchUserInput.addEventListener('input', searchUsers);
+  </script>
 </body>
 </html>
