@@ -14,3 +14,7 @@ Route::get('/user', function () {
 Route::get('/reg', function () {
     return view('registration');
 });
+
+Route::get('/Layout', function () {
+    return view('Layout');
+});
