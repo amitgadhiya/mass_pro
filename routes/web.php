@@ -10,7 +10,17 @@ Route::get('/', function () {
 
 Route::get('/user', function () {
     return view('user');
+});
+Route::get('/user-list', function () {
+    return view('pages.user.list');
 })->name('user');
+Route::get('/user-add', function () {
+    return view('pages.user.add');
+})->name('user-add');
+Route::get('/user-edit', function () {
+    return view('pages.user.edit');
+})->name('user-edit');
+
 
 Route::get('/tax', function () {
     return view('tax');

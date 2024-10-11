@@ -1,0 +1,120 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Light background */
+    color: #333; /* Dark text color */
+}
+
+/* Header styles */
+header {
+    background: #007bff; /* Bootstrap primary color */
+    color: #fff;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #343a40; /* Dark sidebar */
+    color: #fff;
+    position: fixed; /* Fixed position */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+}
+
+.sidebar ul li:hover {
+    background: #495057; /* Hover effect */
+}
+
+/* Main content styles */
+.main-content {
+    margin-left: 260px; /* Space for the sidebar */
+    padding: 20px;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd; /* Light border */
+}
+
+table th {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+}
+
+.table-responsive {
+    overflow-x: auto; /* Horizontal scroll for small screens */
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #007bff; /* Focus border color */
+    outline: none; /* Remove outline */
+}
+
+/* Footer styles */
+footer {
+    background: #007bff; /* Bootstrap primary color */
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
