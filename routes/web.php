@@ -30,6 +30,4 @@ Route::get('/logout', function () {
     return view('logout');
 })->name('logout');
 
-Route::get('/layout', function () {
-    return view('layout');
-})->name('layout');
+
