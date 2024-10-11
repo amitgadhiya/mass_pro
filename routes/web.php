@@ -21,3 +21,9 @@ Route::get('/reg', function () {
 Route::get('/Layout', function () {
     return view('Layout');
 });
+
+Route::get('/taxes', function () {
+    return view('taxes');
+});
+
+
