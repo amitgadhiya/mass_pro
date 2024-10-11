@@ -48,7 +48,7 @@
 
 <div class="login-form">
     <h2>Login form</h2>
-    <form action="/login" method="POST">
+    <form action="/dashboard" method="get">
         <input type="text" name="username" placeholder="Username" required>
         <input type="password" name="password" placeholder="Password" required>
         <button type="submit">submit</button>
